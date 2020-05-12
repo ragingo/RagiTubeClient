@@ -14,25 +14,28 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "0.0.1"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    Properties localProps = new Properties()
+    localProps.load(project.rootProject.file("local.properties").newDataInputStream())
 
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
             versionNameSuffix " (debug)"
+            resValue "string", "google_api_key", localProps.getProperty("google.api_key.develop", "")
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "google_api_key", localProps.getProperty("google.api_key.production", "")
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-
 }
 
 dependencies {
