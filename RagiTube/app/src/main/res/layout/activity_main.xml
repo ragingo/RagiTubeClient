@@ -6,6 +6,9 @@
         <variable
             name="vm"
             type="com.ragingo.ragitube.viewModels.MainViewModel" />
+        <variable
+            name="adapter"
+            type="com.ragingo.ragitube.views.adapters.VideoListAdapter" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            adapter="@{vm.adapter}"/>
+            adapter="@{adapter}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
