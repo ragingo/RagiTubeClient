@@ -24,6 +24,7 @@ class MainViewModel : ViewModel() {
                 res.items.forEach {
                     val item = VideoListItemViewModel()
                     item.title.value = it.snippet.title
+                    item.thumbnailUrl.value = it.snippet.thumbnails.default.url
                     videos.add(item)
                 }
             } catch (e: Exception) {

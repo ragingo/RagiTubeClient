@@ -5,4 +5,5 @@ import androidx.lifecycle.ViewModel
 
 class VideoListItemViewModel : ViewModel() {
     var title = MutableLiveData("")
+    var thumbnailUrl = MutableLiveData("")
 }
