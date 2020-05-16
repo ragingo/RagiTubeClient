@@ -1,4 +1,4 @@
-package com.ragingo.ragitube.services.youtube
+package com.ragingo.ragitube.models.services.youtube
 
 import android.content.Context
 import android.content.pm.PackageManager

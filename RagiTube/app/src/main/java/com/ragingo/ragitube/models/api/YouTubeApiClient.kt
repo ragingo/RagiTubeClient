@@ -2,9 +2,9 @@ package com.ragingo.ragitube.models.api
 
 import android.content.Context
 import com.ragingo.ragitube.R
-import com.ragingo.ragitube.services.youtube.YouTubeApiInterceptor
-import com.ragingo.ragitube.services.youtube.YouTubeService
-import com.ragingo.ragitube.services.youtube.search.SearchResponse
+import com.ragingo.ragitube.models.services.youtube.YouTubeApiInterceptor
+import com.ragingo.ragitube.models.services.youtube.YouTubeService
+import com.ragingo.ragitube.models.services.youtube.search.SearchResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import com.google.android.youtube.player.YouTubeStandalonePlayer
 import com.ragingo.ragitube.R
 import com.ragingo.ragitube.databinding.ActivityMainBinding
 import com.ragingo.ragitube.viewModels.MainViewModel
@@ -21,10 +23,15 @@ class MainActivity : AppCompatActivity() {
         binding.vm = vm
         binding.adapter = VideoListAdapter(this, vm.videos)
 
+        vm.lifecycleOwner = this
+        vm.selectedItemViewModel.observe(this, Observer {
+            if (it == null) {
+                return@Observer
+            }
+            val apiKey = getString(R.string.google_api_key)
+            val intent = YouTubeStandalonePlayer.createVideoIntent(this, apiKey, it.videoId.value);
+            startActivity(intent);
+        })
         vm.loadVideos(this, "あつ森", 20)
-
-//        val videoId = "mw5VIEIvuMI"
-//        val intent = YouTubeStandalonePlayer.createVideoIntent(this, apiKey, videoId);
-//        startActivity(intent);
     }
 }

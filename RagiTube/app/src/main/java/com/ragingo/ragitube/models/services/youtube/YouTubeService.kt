@@ -1,6 +1,6 @@
-package com.ragingo.ragitube.services.youtube
+package com.ragingo.ragitube.models.services.youtube
 
-import com.ragingo.ragitube.services.youtube.search.SearchResponse
+import com.ragingo.ragitube.models.services.youtube.search.SearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
