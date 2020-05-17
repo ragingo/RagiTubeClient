@@ -6,7 +6,7 @@ import androidx.databinding.BindingConversion
 object ViewConverters {
     @BindingConversion
     @JvmStatic
-    fun booleanToVisibility(visible: Boolean) : Int {
+    fun booleanToVisibility(visible: Boolean): Int {
         return if (visible) View.VISIBLE else View.GONE
     }
 }

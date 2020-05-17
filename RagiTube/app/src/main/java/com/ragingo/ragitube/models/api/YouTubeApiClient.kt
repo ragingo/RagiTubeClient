@@ -49,7 +49,12 @@ class YouTubeApiClient(
         service = retrofitBuilder.create(YouTubeService::class.java)
     }
 
-    suspend fun searchByKeyword(part: String, type: String, keyword: String, maxResults: Int): SearchResponse {
+    suspend fun searchByKeyword(
+        part: String,
+        type: String,
+        keyword: String,
+        maxResults: Int
+    ): SearchResponse {
         return service.searchByKeyword(apiKey, part, type, keyword, maxResults)
     }
 }

@@ -2,17 +2,16 @@ package com.ragingo.ragitube.viewModels
 
 import android.content.Context
 import androidx.databinding.ObservableArrayList
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.observe
 import com.ragingo.ragitube.models.api.YouTubeApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
-    companion object {
-        private val TAG = MainViewModel::class.simpleName
-    }
-
     var lifecycleOwner: LifecycleOwner? = null
     val isLoading = MutableLiveData(false)
     val videos = ObservableArrayList<VideoListItemViewModel>()

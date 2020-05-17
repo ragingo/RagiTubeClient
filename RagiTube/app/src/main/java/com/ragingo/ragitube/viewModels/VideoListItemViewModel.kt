@@ -12,7 +12,7 @@ class VideoListItemViewModel : ViewModel() {
     var thumbnailUrl = MutableLiveData("")
 
     companion object {
-        fun create(model: SearchListItem) : VideoListItemViewModel {
+        fun create(model: SearchListItem): VideoListItemViewModel {
             val vm = VideoListItemViewModel()
             vm.videoId.value = model.id.videoId
             vm.title.value = model.snippet.title

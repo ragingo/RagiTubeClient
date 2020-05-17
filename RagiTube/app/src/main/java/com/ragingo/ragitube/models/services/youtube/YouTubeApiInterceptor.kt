@@ -36,7 +36,8 @@ class YouTubeApiInterceptor(
         }
         val newReq =
             req.newBuilder()
-                .addHeader("X-Android-Package",
+                .addHeader(
+                    "X-Android-Package",
                     BuildConfig.APPLICATION_ID
                 )
                 .addHeader("X-Android-Cert", getSha1())
@@ -49,6 +50,7 @@ class YouTubeApiInterceptor(
             if (packageFingerprint.isNotEmpty()) {
                 return packageFingerprint
             }
+            // TODO: 直す
             val signatures =
                 context.packageManager
                     .getPackageInfo(BuildConfig.APPLICATION_ID, PackageManager.GET_SIGNATURES)
@@ -58,7 +60,8 @@ class YouTubeApiInterceptor(
             }
             val md = MessageDigest.getInstance("SHA-1")
             md.update(signatures.first().toByteArray())
-            packageFingerprint = md.digest().map { String.format("%02X", it) }.reduce { a, b -> "${a}${b}" }
+            packageFingerprint =
+                md.digest().map { String.format("%02X", it) }.reduce { a, b -> "${a}${b}" }
             return packageFingerprint
         }
     }

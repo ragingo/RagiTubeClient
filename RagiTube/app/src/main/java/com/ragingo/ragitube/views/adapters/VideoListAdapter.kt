@@ -15,7 +15,8 @@ class VideoListAdapter(
 ) : RecyclerView.Adapter<VideoListAdapter.ViewHolder>() {
 
     init {
-        values.addOnListChangedCallback(object : ObservableList.OnListChangedCallback<ObservableArrayList<VideoListItemViewModel>>() {
+        values.addOnListChangedCallback(object :
+            ObservableList.OnListChangedCallback<ObservableArrayList<VideoListItemViewModel>>() {
             override fun onChanged(sender: ObservableArrayList<VideoListItemViewModel>?) {
                 notifyDataSetChanged()
             }
@@ -67,7 +68,8 @@ class VideoListAdapter(
         holder.vm = values[position]
     }
 
-    inner class ViewHolder(private val binding: ListItemVideoBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ListItemVideoBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         var vm: VideoListItemViewModel?
             get() = binding.vm
             set(value) {
