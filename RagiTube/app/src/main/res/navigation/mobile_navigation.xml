@@ -11,4 +11,7 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home"/>
 
+    <activity android:id="@+id/nav_license"
+        android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity" />
+
 </navigation>
