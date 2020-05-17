@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 return@Observer
             }
             val apiKey = getString(R.string.google_api_key)
-            val intent = YouTubeStandalonePlayer.createVideoIntent(this, apiKey, it.videoId.value);
+            val intent = YouTubeStandalonePlayer.createVideoIntent(this, apiKey, it.videoId.value, 0, true, true);
             startActivity(intent);
         })
         vm.loadVideos(this, "あつ森", 20)
