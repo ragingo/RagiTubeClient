@@ -1,44 +1,44 @@
 package com.ragingo.ragitube.views
 
 import android.os.Bundle
-import androidx.activity.viewModels
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import com.google.android.youtube.player.YouTubeStandalonePlayer
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.ragingo.ragitube.R
-import com.ragingo.ragitube.databinding.ActivityMainBinding
-import com.ragingo.ragitube.viewModels.MainViewModel
-import com.ragingo.ragitube.views.adapters.VideoListAdapter
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity() {
-    private val vm: MainViewModel by viewModels()
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.lifecycleOwner = this
-        binding.vm = vm
-        binding.adapter = VideoListAdapter(this, vm.videos)
+        setSupportActionBar(toolbar)
 
-        vm.lifecycleOwner = this
-        vm.selectedItemViewModel.observe(this, Observer {
-            if (it == null) {
-                return@Observer
-            }
-            val apiKey = getString(R.string.google_api_key)
-            val intent = YouTubeStandalonePlayer.createVideoIntent(
-                this,
-                apiKey,
-                it.videoId.value,
-                0,
-                true,
-                true
-            )
-            startActivity(intent)
-        })
-        vm.loadVideos(this, "あつ森", 20)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_home
+            ), drawer_layout
+        )
+
+        val navController = findNavController(R.id.nav_host_fragment)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        nav_view.setupWithNavController(navController)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

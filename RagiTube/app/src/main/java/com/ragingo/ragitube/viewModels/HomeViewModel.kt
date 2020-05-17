@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
     var lifecycleOwner: LifecycleOwner? = null
     val isLoading = MutableLiveData(false)
     val videos = ObservableArrayList<VideoListItemViewModel>()
