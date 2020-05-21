@@ -9,9 +9,20 @@
         android:id="@+id/nav_home"
         android:name="com.ragingo.ragitube.views.ui.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_nav_license"
+            app:destination="@id/nav_license" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_search_result"
+            app:destination="@id/nav_search_result" />
+    </fragment>
 
     <activity android:id="@+id/nav_license"
         android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity" />
+
+    <fragment
+        android:id="@+id/nav_search_result"
+        android:name="com.ragingo.ragitube.views.ui.SearchResultFragment" />
 
 </navigation>
