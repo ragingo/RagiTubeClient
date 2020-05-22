@@ -10,6 +10,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ragingo.ragitube.R
+import com.ragingo.ragitube.views.ui.HomeFragmentDirections
+import com.ragingo.ragitube.views.ui.SearchResultFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -39,10 +41,12 @@ class MainActivity : AppCompatActivity() {
         val searchView = menu.findItem(R.id.action_search).actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query?.trim().isNullOrEmpty()) {
+                val keyword = query?.trim()
+                if (keyword.isNullOrEmpty()) {
                     return false
                 }
-                findNavController(R.id.nav_host_fragment).navigate(R.id.action_nav_home_to_nav_search_result)
+                val directions = HomeFragmentDirections.actionNavHomeToNavSearchResult(query)
+                findNavController(R.id.nav_host_fragment).navigate(directions)
                 return true
             }
 

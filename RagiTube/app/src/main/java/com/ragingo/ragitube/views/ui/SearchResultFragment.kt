@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.google.android.youtube.player.YouTubeStandalonePlayer
 import com.ragingo.ragitube.R
 import com.ragingo.ragitube.databinding.FragmentHomeBinding
@@ -16,6 +17,7 @@ import com.ragingo.ragitube.viewModels.SearchResultViewModel
 import com.ragingo.ragitube.views.adapters.VideoListAdapter
 
 class SearchResultFragment : Fragment() {
+    private val args: SearchResultFragmentArgs by navArgs()
     private val vm: SearchResultViewModel by viewModels()
     private lateinit var binding: FragmentSearchResultBinding
 
@@ -50,6 +52,6 @@ class SearchResultFragment : Fragment() {
             )
             startActivity(intent)
         })
-        vm.loadVideos(requireContext(), "スマブラ", 20)
+        vm.loadVideos(requireContext(), args.keyword, 20)
     }
 }
