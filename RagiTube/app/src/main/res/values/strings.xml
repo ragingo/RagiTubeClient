@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">RagiTube</string>
-    <string name="action_settings">Settings</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_license">License</string>
+    <string name="menu_home">ホーム</string>
+    <string name="menu_settings">設定</string>
+    <string name="menu_license">ライセンス</string>
+    <string name="title_searchResult">検索結果</string>
 </resources>

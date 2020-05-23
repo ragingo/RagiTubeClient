@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.google.android.youtube.player.YouTubeStandalonePlayer
 import com.ragingo.ragitube.R
-import com.ragingo.ragitube.databinding.FragmentHomeBinding
 import com.ragingo.ragitube.databinding.FragmentSearchResultBinding
 import com.ragingo.ragitube.viewModels.SearchResultViewModel
 import com.ragingo.ragitube.views.adapters.VideoListAdapter
