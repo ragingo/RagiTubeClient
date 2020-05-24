@@ -6,42 +6,52 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.observe
-import com.ragingo.ragitube.models.api.YouTubeApiClient
+import com.ragingo.ragitube.models.repos.YouTubeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class SearchResultViewModel : ViewModel() {
-    var lifecycleOwner: LifecycleOwner? = null
+    private lateinit var repo: YouTubeRepository
+    private lateinit var lifecycleOwner: LifecycleOwner
+
+    var isInitialized : Boolean = false
+        private set
     val isLoading = MutableLiveData(false)
     val videos = ObservableArrayList<VideoListItemViewModel>()
-    val selectedItemViewModel: MutableLiveData<VideoListItemViewModel?> = MutableLiveData(null)
+    val selectedItem: MutableLiveData<VideoListItemViewModel?> = MutableLiveData(null)
 
-    fun loadVideos(context: Context, keyword: String, maxCount: Int) {
+    fun init(context: Context, lifecycleOwner: LifecycleOwner) {
+        this.isInitialized = true
+        this.repo = YouTubeRepository(context)
+        this.lifecycleOwner = lifecycleOwner
+    }
+
+    fun setup(keyword: String, maxCount: Int) {
+        check(isInitialized)
+        search(keyword, maxCount)
+    }
+
+    private fun search(keyword: String, maxCount: Int) {
         videos.clear()
-        selectedItemViewModel.value = null
-
-        val client = YouTubeApiClient(context)
+        selectedItem.value = null
 
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 isLoading.value = true
 
-                val res = client.searchByKeyword("snippet", "video", keyword, maxCount)
+                val res = repo.searchVideosByKeyword(keyword, maxCount)
                 res.items.forEach {
                     val item = VideoListItemViewModel.create(it)
-
-                    if (lifecycleOwner != null) {
-                        item.isSelected.observe(lifecycleOwner!!, { value ->
-                            if (!value) {
-                                return@observe
-                            }
-                            if (selectedItemViewModel.value !== item) {
-                                selectedItemViewModel.value = item
-                            }
-                            item.unselect()
-                        })
-                    }
+                    item.isSelected.observe(lifecycleOwner, { value ->
+                        if (!value) {
+                            return@observe
+                        }
+                        if (selectedItem.value !== item) {
+                            selectedItem.value = item
+                        }
+                        item.unselect()
+                    })
                     videos.add(item)
                 }
             } catch (e: Exception) {

@@ -53,8 +53,9 @@ class YouTubeApiClient(
         part: String,
         type: String,
         keyword: String,
-        maxResults: Int
+        maxResults: Int,
+        pageToken: String? = null
     ): SearchResponse {
-        return service.searchByKeyword(apiKey, part, type, keyword, maxResults)
+        return service.searchByKeyword(apiKey, part, type, keyword, maxResults, pageToken)
     }
 }

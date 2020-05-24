@@ -12,6 +12,7 @@ interface YouTubeService {
         @Query("part") part: String,
         @Query("type") type: String,
         @Query("q") keyword: String,
-        @Query("maxResults") maxResults: Int
+        @Query("maxResults") maxResults: Int,
+        @Query("pageToken") pageToken: String? = null
     ): SearchResponse
 }

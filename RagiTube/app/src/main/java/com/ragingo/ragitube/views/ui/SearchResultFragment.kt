@@ -35,22 +35,24 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vm.lifecycleOwner = this
-        vm.selectedItemViewModel.observe(viewLifecycleOwner, Observer {
-            if (it == null) {
-                return@Observer
-            }
-            val apiKey = getString(R.string.google_api_key)
-            val intent = YouTubeStandalonePlayer.createVideoIntent(
-                activity,
-                apiKey,
-                it.videoId.value,
-                0,
-                true,
-                true
-            )
-            startActivity(intent)
-        })
-        vm.loadVideos(requireContext(), args.keyword, 20)
+        if (!vm.isInitialized) {
+            vm.init(requireContext(), this)
+            vm.selectedItem.observe(viewLifecycleOwner, Observer {
+                if (it == null) {
+                    return@Observer
+                }
+                val apiKey = getString(R.string.google_api_key)
+                val intent = YouTubeStandalonePlayer.createVideoIntent(
+                    activity,
+                    apiKey,
+                    it.videoId.value,
+                    0,
+                    true,
+                    true
+                )
+                startActivity(intent)
+            })
+            vm.setup(args.keyword, 20)
+        }
     }
 }
