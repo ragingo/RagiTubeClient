@@ -9,8 +9,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.ragingo.ragitube.MobileNavigationDirections
 import com.ragingo.ragitube.R
-import com.ragingo.ragitube.views.ui.HomeFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 if (keyword.isNullOrEmpty()) {
                     return false
                 }
-                val directions = HomeFragmentDirections.actionNavHomeToNavSearchResult(query)
+                val directions = MobileNavigationDirections.actionGlobalNavSearchResult(query)
                 findNavController(R.id.nav_host_fragment).navigate(directions)
                 return true
             }

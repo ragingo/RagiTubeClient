@@ -11,9 +11,6 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_nav_home_to_nav_search_result"
-            app:destination="@id/nav_search_result" />
-        <action
             android:id="@+id/action_nav_home_to_settingsFragment"
             app:destination="@id/nav_settings" />
     </fragment>
@@ -38,5 +35,7 @@
             android:id="@+id/action_nav_settings_to_nav_license"
             app:destination="@id/nav_license" />
     </fragment>
+
+    <action android:id="@+id/action_global_nav_search_result" app:destination="@id/nav_search_result" />
 
 </navigation>
