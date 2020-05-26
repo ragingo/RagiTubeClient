@@ -17,6 +17,10 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    private val navController by lazy {
+        findNavController(R.id.nav_host_fragment)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,7 +34,6 @@ class MainActivity : AppCompatActivity() {
             ), drawer_layout
         )
 
-        val navController = findNavController(R.id.nav_host_fragment)
         setupActionBarWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
     }
@@ -42,7 +45,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
@@ -55,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                     return false
                 }
                 val directions = MobileNavigationDirections.actionGlobalNavSearchResult(query)
-                findNavController(R.id.nav_host_fragment).navigate(directions)
+                navController.navigate(directions)
                 return true
             }
 
