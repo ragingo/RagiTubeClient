@@ -9,6 +9,7 @@ import androidx.lifecycle.observe
 import com.ragingo.ragitube.models.repos.YouTubeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class SearchResultViewModel : ViewModel() {
@@ -25,6 +26,13 @@ class SearchResultViewModel : ViewModel() {
         this.isInitialized = true
         this.repo = YouTubeRepository(context)
         this.lifecycleOwner = lifecycleOwner
+
+        // debug
+        GlobalScope.launch {
+            repo.getSearchHistories().forEach {
+                println(it)
+            }
+        }
     }
 
     fun setup(keyword: String, maxCount: Int) {
